@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-cn">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -33,13 +33,13 @@
       <section class="pt-32 pb-20 px-6 bg-gray-50">
         <div class="max-w-4xl mx-auto text-center">
           <div class="inline-block mb-4 px-4 py-2 rounded-full bg-blue-50 border border-blue-100">
-            <span class="text-sm font-medium text-blue-600">📚 Simplifying Complex Ideas</span>
+            <span class="text-sm font-medium text-blue-600">📚 简化复杂的想法</span>
           </div>
           <h2 class="text-6xl font-bold text-gray-900 mb-6 leading-tight">
             Simple Paper
           </h2>
           <p class="text-lg text-gray-600 leading-relaxed max-w-2xl mx-auto">
-            This website will explain academic papers or blog articles to you in simple language with lively visual charts and diagrams.
+            这个网站会以通俗易懂的语言，并结合生动的图表和示意图，为您讲解学术论文或博客文章的内容。
           </p>
         </div>
       </section>
@@ -48,9 +48,27 @@
       <section class="py-20 px-6">
         <div class="max-w-4xl mx-auto">
           <div class="mb-12">
-            <h3 class="text-3xl font-bold text-gray-900 mb-2">Featured Articles</h3>
+            <h3 class="text-3xl font-bold text-gray-900 mb-2">专题文章</h3>
             <div class="h-1 w-16 bg-blue-600 rounded-full"></div>
           </div>
+          
+          <!-- Tab Navigation -->
+          <div class="flex gap-2 mb-8 border-b border-gray-200">
+            <button class="tab-btn px-4 py-3 font-medium text-gray-700 border-b-2 border-transparent hover:border-blue-300 transition-colors duration-200 cursor-pointer active" data-tab="anthropic">
+              Anthropic
+            </button>
+            <button class="tab-btn px-4 py-3 font-medium text-gray-700 border-b-2 border-transparent hover:border-blue-300 transition-colors duration-200 cursor-pointer" data-tab="openai">
+              OpenAI
+            </button>
+            <button class="tab-btn px-4 py-3 font-medium text-gray-700 border-b-2 border-transparent hover:border-blue-300 transition-colors duration-200 cursor-pointer" data-tab="google">
+              Google
+            </button>
+            <button class="tab-btn px-4 py-3 font-medium text-gray-700 border-b-2 border-transparent hover:border-blue-300 transition-colors duration-200 cursor-pointer" data-tab="arxiv">
+              ArXiv
+            </button>
+          </div>
+
+          <!-- Article List Container -->
           <div id="articleList" class="space-y-4">
             <!-- Articles will be dynamically loaded here -->
           </div>
@@ -66,20 +84,47 @@
     </footer>
 
     <script>
-      // Article data
-      const articles = [
-        {
-          id: 'invasive-context-engineering',
-          title: 'Invasive Context Engineering to Control Large Language Models',
-          date: 'November 28, 2024',
-          url: 'invasive-context-engineering-to-control-large-language-models.html'
-        }
-      ];
+      // Article data by source
+      const articlesBySource = {
+        anthropic: [
+          {
+            title: '介绍 Agent Skills',
+            date: '2025 年 10 月',
+            url: 'anthropic/introducing-agent-skills.html'
+          }
+        ],
+        openai: [],
+        google: [],
+        arxiv: []
+      };
 
-      // Render article list
-      $(document).ready(function() {
+      let currentTab = 'anthropic';
+
+      // Extract filename from path to create title
+      function extractTitleFromFilename(filename) {
+        return filename
+          .replace('.html', '')
+          .split('-')
+          .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+          .join(' ');
+      }
+
+      // Render article list for current tab
+      function renderArticles(tab) {
         const articleList = $('#articleList');
+        articleList.empty();
         
+        const articles = articlesBySource[tab] || [];
+        
+        if (articles.length === 0) {
+          articleList.html(`
+            <div class="py-8 text-center text-gray-500">
+              <p>暂无文章</p>
+            </div>
+          `);
+          return;
+        }
+
         articles.forEach(article => {
           const articleCard = $(`
             <a href="${article.url}" class="block py-4 border-b border-gray-200 hover:border-blue-400 group transition-colors duration-200">
@@ -100,6 +145,27 @@
           `);
           articleList.append(articleCard);
         });
+      }
+
+      // Initialize
+      $(document).ready(function() {
+        // Tab click handler
+        $('.tab-btn').on('click', function() {
+          const tab = $(this).data('tab');
+          currentTab = tab;
+          
+          // Update active tab button
+          $('.tab-btn').removeClass('active border-blue-600').addClass('border-transparent');
+          $(this).addClass('active border-blue-600').removeClass('border-transparent');
+          
+          // Render articles for selected tab
+          renderArticles(tab);
+        });
+
+        // Initial render
+        renderArticles(currentTab);
+        // Set initial active tab style
+        $('.tab-btn[data-tab="anthropic"]').addClass('border-blue-600').removeClass('border-transparent');
       });
     </script>
   </body>

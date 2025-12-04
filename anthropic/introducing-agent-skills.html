@@ -1,0 +1,762 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Agent Skills - 让 AI 助手更聪明</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <script>
+      mermaid.initialize({ startOnLoad: true, theme: "default" });
+    </script>
+    <style>
+      /* 不要写任何 CSS 代码！ */
+      /* 仅需在`class`中使用 Tailwind CSS 语法写样式即可！ */
+    </style>
+    <script>
+      $(document).ready(function() {
+        // 动画效果
+        $('[data-animate]').each(function() {
+          const element = $(this);
+          element.on('inview', function() {
+            element.addClass('animate-fade-in');
+          });
+        });
+      });
+    </script>
+  </head>
+  <body class="bg-white">
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full bg-white shadow-sm z-50 border-b border-gray-100">
+      <div class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
+        <div class="flex items-center gap-2">
+          <div class="w-8 h-8 rounded-lg bg-blue-600 flex items-center justify-center">
+            <span class="text-white font-bold text-sm">SP</span>
+          </div>
+          <h1 class="text-lg font-bold text-gray-900">Simple Paper</h1>
+        </div>
+        <a
+          href="../index.html"
+          target="_self"
+          rel="noopener noreferrer"
+          class="flex items-center gap-2 px-4 py-2 rounded-lg bg-blue-600 hover:bg-blue-700 text-white transition-all duration-300 font-medium"
+        >
+          <p class="text-sm">回到主页</p>
+        </a>
+      </div>
+    </nav>
+
+    <!-- Hero -->
+    <section id="hero" class="pt-32 pb-16 px-6 bg-gradient-to-br from-blue-50 to-indigo-50">
+      <div class="max-w-4xl mx-auto text-center">
+        <h1 class="text-5xl font-bold text-gray-900 mb-6">
+          让 AI 助手更聪明的秘密武器
+        </h1>
+        <div class="text-xl text-gray-600 mb-8">
+          通过打包专业知识和工作流程，让通用 AI 助手变成专业领域的专家。这就是 Agent Skills（代理技能）的力量。
+        </div>
+        <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-8 max-w-2xl mx-auto">
+          <div class="mb-6">
+            <h2 class="text-2xl font-bold text-gray-900 leading-snug">
+              让代理从多面手变成专家
+            </h2>
+          </div>
+          <div class="flex flex-col gap-4 mb-6 text-sm text-gray-600">
+            <div class="flex items-center gap-2">
+              <span class="font-semibold text-gray-900">🏢</span>
+              <span>Anthropic（人类智能研究公司）</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <span class="font-semibold">📅</span>
+              <span>2025 年 10 月</span>
+            </div>
+          </div>
+          <div class="flex flex-wrap gap-3 justify-center">
+            <a
+              href="https://www.claude.com/blog/skills"
+              target="_blank"
+              class="inline-flex items-center gap-2 px-5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-medium transition-colors shadow-sm hover:shadow-md"
+            >
+              <span>📖</span>
+              <span>Claude 博客</span>
+            </a>
+            <a
+              href="https://www.anthropic.com/engineering/equipping-agents-for-the-real-world-with-agent-skills"
+              target="_blank"
+              class="inline-flex items-center gap-2 px-5 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg font-medium transition-colors shadow-sm hover:shadow-md"
+            >
+              <span>⚙️</span>
+              <span>工程博客</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Problem Section -->
+    <section class="py-16 px-6 bg-white">
+      <div class="max-w-6xl mx-auto">
+        <div class="text-center mb-12">
+          <h2 class="text-4xl font-bold text-gray-900 mb-4">为什么需要 Agent Skills？</h2>
+          <p class="text-lg text-gray-600">AI 助手虽然强大，但在真实工作中往往缺少必要的专业知识</p>
+        </div>
+        
+        <div class="grid md:grid-cols-2 gap-8 mb-12">
+          <div class="bg-red-50 rounded-lg p-8 border border-red-200">
+            <div class="text-3xl mb-3">❌</div>
+            <h3 class="text-xl font-bold text-gray-900 mb-3">没有 Skills 的情况</h3>
+            <ul class="space-y-3 text-gray-700">
+              <li class="flex gap-2"><span class="text-red-500">•</span> <span>每次都得重新解释工作流程</span></li>
+              <li class="flex gap-2"><span class="text-red-500">•</span> <span>AI 不懂公司特定的规则和格式</span></li>
+              <li class="flex gap-2"><span class="text-red-500">•</span> <span>需要为不同任务重新编写 AI 指令</span></li>
+              <li class="flex gap-2"><span class="text-red-500">•</span> <span>容易出错，无法复用经验</span></li>
+            </ul>
+          </div>
+
+          <div class="bg-green-50 rounded-lg p-8 border border-green-200">
+            <div class="text-3xl mb-3">✅</div>
+            <h3 class="text-xl font-bold text-gray-900 mb-3">使用 Skills 后</h3>
+            <ul class="space-y-3 text-gray-700">
+              <li class="flex gap-2"><span class="text-green-500">•</span> <span>AI 自动加载相关的专业知识</span></li>
+              <li class="flex gap-2"><span class="text-green-500">•</span> <span>理解组织的规则和最佳实践</span></li>
+              <li class="flex gap-2"><span class="text-green-500">•</span> <span>一次创建，处处使用</span></li>
+              <li class="flex gap-2"><span class="text-green-500">•</span> <span>专业化的 AI 助手，效率更高</span></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Concept Section -->
+    <section class="py-16 px-6 bg-gray-50">
+      <div class="max-w-6xl mx-auto">
+        <div class="text-center mb-12">
+          <h2 class="text-4xl font-bold text-gray-900 mb-4">Agent Skills 是什么？</h2>
+          <p class="text-lg text-gray-600">简单来说，就是给 AI 助手的"工作手册"</p>
+        </div>
+
+        <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-8 mb-8">
+          <div class="max-w-3xl mx-auto">
+            <div class="bg-blue-50 rounded-lg p-6 border border-blue-200 mb-6">
+              <p class="text-lg text-gray-700 leading-relaxed">
+                <span class="font-bold text-blue-600">Agent Skills</span> 是一个文件夹，包含：
+              </p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-6">
+              <div class="text-center">
+                <div class="text-4xl mb-3">📄</div>
+                <h4 class="font-bold text-gray-900 mb-2">指导说明</h4>
+                <p class="text-sm text-gray-600">
+                  清晰的步骤和规则，告诉 AI 该怎么做
+                </p>
+              </div>
+              <div class="text-center">
+                <div class="text-4xl mb-3">⚙️</div>
+                <h4 class="font-bold text-gray-900 mb-2">脚本代码</h4>
+                <p class="text-sm text-gray-600">
+                  可执行的工具和脚本，完成具体操作
+                </p>
+              </div>
+              <div class="text-center">
+                <div class="text-4xl mb-3">📦</div>
+                <h4 class="font-bold text-gray-900 mb-2">资源文件</h4>
+                <p class="text-sm text-gray-600">
+                  必要的参考材料和数据资源
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-8">
+          <h3 class="text-xl font-bold text-gray-900 mb-6">Skills 的核心特性</h3>
+          <div class="grid md:grid-cols-2 gap-6">
+            <div class="flex gap-4">
+              <div class="flex-shrink-0">
+                <div class="flex items-center justify-center h-10 w-10 rounded-md bg-blue-600 text-white text-lg">🎯</div>
+              </div>
+              <div>
+                <h4 class="font-bold text-gray-900 mb-1">可组合</h4>
+                <p class="text-gray-600 text-sm">多个 Skills 可以组合使用，AI 自动识别需要哪些</p>
+              </div>
+            </div>
+            <div class="flex gap-4">
+              <div class="flex-shrink-0">
+                <div class="flex items-center justify-center h-10 w-10 rounded-md bg-indigo-600 text-white text-lg">📦</div>
+              </div>
+              <div>
+                <h4 class="font-bold text-gray-900 mb-1">可移植</h4>
+                <p class="text-gray-600 text-sm">在各个 Claude 产品间通用，一次创建处处使用</p>
+              </div>
+            </div>
+            <div class="flex gap-4">
+              <div class="flex-shrink-0">
+                <div class="flex items-center justify-center h-10 w-10 rounded-md bg-green-600 text-white text-lg">⚡</div>
+              </div>
+              <div>
+                <h4 class="font-bold text-gray-900 mb-1">高效</h4>
+                <p class="text-gray-600 text-sm">只加载需要的部分，节省 AI 上下文空间</p>
+              </div>
+            </div>
+            <div class="flex gap-4">
+              <div class="flex-shrink-0">
+                <div class="flex items-center justify-center h-10 w-10 rounded-md bg-purple-600 text-white text-lg">💪</div>
+              </div>
+              <div>
+                <h4 class="font-bold text-gray-900 mb-1">强大</h4>
+                <p class="text-gray-600 text-sm">不仅有指导，还能执行代码，精准可靠</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Structure Section -->
+    <section class="py-16 px-6 bg-white">
+      <div class="max-w-6xl mx-auto">
+        <div class="text-center mb-12">
+          <h2 class="text-4xl font-bold text-gray-900 mb-4">Skills 的构成</h2>
+          <p class="text-lg text-gray-600">层层递进的信息架构，按需加载</p>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-8">
+          <div>
+            <h3 class="text-xl font-bold text-gray-900 mb-6">三个层级</h3>
+            <div class="space-y-4">
+              <div class="bg-gradient-to-r from-blue-50 to-blue-100 rounded-lg p-6 border border-blue-200">
+                <div class="flex items-start gap-4">
+                  <div class="text-2xl font-bold text-blue-600">1️⃣</div>
+                  <div>
+                    <h4 class="font-bold text-gray-900 mb-1">名字和描述</h4>
+                    <p class="text-sm text-gray-700">
+                      AI 一开始看到的，用来判断是否需要这个 Skill
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="bg-gradient-to-r from-indigo-50 to-indigo-100 rounded-lg p-6 border border-indigo-200">
+                <div class="flex items-start gap-4">
+                  <div class="text-2xl font-bold text-indigo-600">2️⃣</div>
+                  <div>
+                    <h4 class="font-bold text-gray-900 mb-1">完整说明文件</h4>
+                    <p class="text-sm text-gray-700">
+                      Skill 被激活后，AI 会读取 SKILL.md 了解具体内容
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="bg-gradient-to-r from-purple-50 to-purple-100 rounded-lg p-6 border border-purple-200">
+                <div class="flex items-start gap-4">
+                  <div class="text-2xl font-bold text-purple-600">3️⃣</div>
+                  <div>
+                    <h4 class="font-bold text-gray-900 mb-1">附加资源</h4>
+                    <p class="text-sm text-gray-700">
+                      特定场景的文件（如表单、代码等），按需加载
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <h3 class="text-xl font-bold text-gray-900 mb-6">实际例子：PDF Skills</h3>
+            <div class="bg-gray-50 rounded-lg p-6 border border-gray-200 font-mono text-sm mb-4">
+              <div class="text-gray-500 mb-4">pdf-skill/</div>
+              <div class="ml-4 space-y-2">
+                <div class="text-gray-700">
+                  <span class="text-blue-600">📄</span> SKILL.md
+                </div>
+                <div class="text-gray-500 text-xs ml-4">
+                  ↳ 基本说明（文件处理方法）
+                </div>
+                <div class="text-gray-700 mt-3">
+                  <span class="text-green-600">📄</span> reference.md
+                </div>
+                <div class="text-gray-500 text-xs ml-4">
+                  ↳ 详细参考（高级功能）
+                </div>
+                <div class="text-gray-700 mt-3">
+                  <span class="text-purple-600">📄</span> forms.md
+                </div>
+                <div class="text-gray-500 text-xs ml-4">
+                  ↳ 表单处理指南（填写 PDF 表单）
+                </div>
+                <div class="text-gray-700 mt-3">
+                  <span class="text-orange-600">⚙️</span> extract_fields.py
+                </div>
+                <div class="text-gray-500 text-xs ml-4">
+                  ↳ 可执行脚本（提取表单字段）
+                </div>
+              </div>
+            </div>
+            <p class="text-sm text-gray-600">
+              💡 这样设计的好处：Skills 不会过于庞大，AI 只在需要时才加载额外信息
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section class="py-16 px-6 bg-gradient-to-br from-indigo-50 to-blue-50">
+      <div class="max-w-6xl mx-auto">
+        <div class="text-center mb-12">
+          <h2 class="text-4xl font-bold text-gray-900 mb-4">工作流程</h2>
+          <p class="text-lg text-gray-600">AI 如何发现和使用 Skills</p>
+        </div>
+
+        <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-8 mb-8">
+          <div class="max-w-3xl mx-auto">
+            <svg class="w-full h-auto" viewBox="0 0 800 300" xmlns="http://www.w3.org/2000/svg">
+              <!-- 第一步 -->
+              <rect x="20" y="60" width="140" height="80" rx="8" fill="#EFF6FF" stroke="#0EA5E9" stroke-width="2"/>
+              <text x="90" y="90" font-size="14" font-weight="bold" text-anchor="middle" fill="#1E40AF">
+                1. 加载 Skills
+              </text>
+              <text x="90" y="110" font-size="12" text-anchor="middle" fill="#334155">
+                名字和描述
+              </text>
+              <text x="90" y="128" font-size="12" text-anchor="middle" fill="#334155">
+                进入 AI 的脑子
+              </text>
+
+              <!-- 箭头 -->
+              <line x1="160" y1="100" x2="220" y2="100" stroke="#64748B" stroke-width="2"/>
+              <polygon points="220,100 210,95 210,105" fill="#64748B"/>
+
+              <!-- 第二步 -->
+              <rect x="220" y="60" width="140" height="80" rx="8" fill="#FEF3C7" stroke="#FBBF24" stroke-width="2"/>
+              <text x="290" y="90" font-size="14" font-weight="bold" text-anchor="middle" fill="#92400E">
+                2. 判断需求
+              </text>
+              <text x="290" y="110" font-size="12" text-anchor="middle" fill="#334155">
+                用户任务是否
+              </text>
+              <text x="290" y="128" font-size="12" text-anchor="middle" fill="#334155">
+                需要某个 Skill？
+              </text>
+
+              <!-- 箭头 -->
+              <line x1="360" y1="100" x2="420" y2="100" stroke="#64748B" stroke-width="2"/>
+              <polygon points="420,100 410,95 410,105" fill="#64748B"/>
+
+              <!-- 第三步 -->
+              <rect x="420" y="60" width="140" height="80" rx="8" fill="#DBEAFE" stroke="#3B82F6" stroke-width="2"/>
+              <text x="490" y="90" font-size="14" font-weight="bold" text-anchor="middle" fill="#1E40AF">
+                3. 加载内容
+              </text>
+              <text x="490" y="110" font-size="12" text-anchor="middle" fill="#334155">
+                读取 SKILL.md
+              </text>
+              <text x="490" y="128" font-size="12" text-anchor="middle" fill="#334155">
+                获取详细说明
+              </text>
+
+              <!-- 箭头 -->
+              <line x1="560" y1="100" x2="620" y2="100" stroke="#64748B" stroke-width="2"/>
+              <polygon points="620,100 610,95 610,105" fill="#64748B"/>
+
+              <!-- 第四步 -->
+              <rect x="620" y="60" width="160" height="80" rx="8" fill="#D1FAE5" stroke="#10B981" stroke-width="2"/>
+              <text x="700" y="90" font-size="14" font-weight="bold" text-anchor="middle" fill="#065F46">
+                4. 执行任务
+              </text>
+              <text x="700" y="110" font-size="12" text-anchor="middle" fill="#334155">
+                按需加载代码
+              </text>
+              <text x="700" y="128" font-size="12" text-anchor="middle" fill="#334155">
+                和资源完成工作
+              </text>
+
+              <!-- 下面的说明 -->
+              <text x="400" y="200" font-size="12" text-anchor="middle" fill="#475569" font-style="italic">
+                每个步骤只加载需要的信息，而不是一次性加载所有内容
+              </text>
+            </svg>
+          </div>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-8">
+          <div class="bg-white rounded-lg p-6 border border-gray-200">
+            <h3 class="text-lg font-bold text-gray-900 mb-4">为什么这样设计？</h3>
+            <ul class="space-y-3 text-sm text-gray-700">
+              <li class="flex gap-3">
+                <span class="text-blue-600 font-bold">✓</span>
+                <span>节省 AI 的"思考空间"（上下文窗口）</span>
+              </li>
+              <li class="flex gap-3">
+                <span class="text-blue-600 font-bold">✓</span>
+                <span>Skills 可以无限大，不受限制</span>
+              </li>
+              <li class="flex gap-3">
+                <span class="text-blue-600 font-bold">✓</span>
+                <span>速度更快，响应更迅速</span>
+              </li>
+              <li class="flex gap-3">
+                <span class="text-blue-600 font-bold">✓</span>
+                <span>用户体验更好</span>
+              </li>
+            </ul>
+          </div>
+
+          <div class="bg-white rounded-lg p-6 border border-gray-200">
+            <h3 class="text-lg font-bold text-gray-900 mb-4">何时使用代码执行？</h3>
+            <p class="text-sm text-gray-700 mb-4">
+              某些操作用代码比用文字描述更好：
+            </p>
+            <ul class="space-y-3 text-sm text-gray-700">
+              <li class="flex gap-3">
+                <span class="text-green-600 font-bold">🔧</span>
+                <span>排序、数据处理等确定性操作</span>
+              </li>
+              <li class="flex gap-3">
+                <span class="text-green-600 font-bold">🔧</span>
+                <span>性能要求高的任务</span>
+              </li>
+              <li class="flex gap-3">
+                <span class="text-green-600 font-bold">🔧</span>
+                <span>需要绝对准确的操作</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Real World Examples Section -->
+    <section class="py-16 px-6 bg-gray-50">
+      <div class="max-w-6xl mx-auto">
+        <div class="text-center mb-12">
+          <h2 class="text-4xl font-bold text-gray-900 mb-4">实际应用例子</h2>
+          <p class="text-lg text-gray-600">看看 Skills 如何在真实场景中工作</p>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-6">
+          <!-- 例子1 -->
+          <div class="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden hover:shadow-md transition-shadow">
+            <div class="bg-gradient-to-r from-blue-500 to-blue-600 p-6 text-white">
+              <div class="text-3xl mb-2">📋</div>
+              <h3 class="text-lg font-bold">PDF 文件处理</h3>
+            </div>
+            <div class="p-6">
+              <p class="text-sm text-gray-600 mb-4">
+                用 Claude 填写和提取 PDF 表单数据
+              </p>
+              <div class="bg-gray-50 rounded p-3 text-xs font-mono text-gray-700 mb-4">
+                <div class="text-gray-500 mb-2">Skill 包含：</div>
+                <div>• 表单识别指南</div>
+                <div>• Python 提取脚本</div>
+                <div>• 常见问题汇总</div>
+              </div>
+              <p class="text-xs text-gray-500">
+                💡 Claude 自动识别处理 PDF 的需求，加载相关 Skill
+              </p>
+            </div>
+          </div>
+
+          <!-- 例子2 -->
+          <div class="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden hover:shadow-md transition-shadow">
+            <div class="bg-gradient-to-r from-green-500 to-green-600 p-6 text-white">
+              <div class="text-3xl mb-2">🏢</div>
+              <h3 class="text-lg font-bold">企业品牌指南</h3>
+            </div>
+            <div class="p-6">
+              <p class="text-sm text-gray-600 mb-4">
+                确保所有生成内容符合公司品牌标准
+              </p>
+              <div class="bg-gray-50 rounded p-3 text-xs font-mono text-gray-700 mb-4">
+                <div class="text-gray-500 mb-2">Skill 包含：</div>
+                <div>• 品牌规范文档</div>
+                <div>• 文案风格指南</div>
+                <div>• Logo 使用规范</div>
+              </div>
+              <p class="text-xs text-gray-500">
+                💡 AI 在写文案或设计时自动遵循品牌标准
+              </p>
+            </div>
+          </div>
+
+          <!-- 例子3 -->
+          <div class="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden hover:shadow-md transition-shadow">
+            <div class="bg-gradient-to-r from-purple-500 to-purple-600 p-6 text-white">
+              <div class="text-3xl mb-2">⚙️</div>
+              <h3 class="text-lg font-bold">数据分析工作流</h3>
+            </div>
+            <div class="p-6">
+              <p class="text-sm text-gray-600 mb-4">
+                特定行业的数据处理和分析流程
+              </p>
+              <div class="bg-gray-50 rounded p-3 text-xs font-mono text-gray-700 mb-4">
+                <div class="text-gray-500 mb-2">Skill 包含：</div>
+                <div>• 数据清理步骤</div>
+                <div>• 分析工具脚本</div>
+                <div>• 报告模板</div>
+              </div>
+              <p class="text-xs text-gray-500">
+                💡 一致的分析流程，质量更稳定
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Best Practices Section -->
+    <section class="py-16 px-6 bg-white">
+      <div class="max-w-6xl mx-auto">
+        <div class="text-center mb-12">
+          <h2 class="text-4xl font-bold text-gray-900 mb-4">如何创建好的 Skill</h2>
+          <p class="text-lg text-gray-600">创建有效 Skills 的最佳实践</p>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-8">
+          <div class="space-y-6">
+            <div class="bg-gradient-to-r from-blue-50 to-blue-100 rounded-lg p-6 border border-blue-200">
+              <div class="flex items-start gap-4">
+                <div class="text-2xl">🎯</div>
+                <div>
+                  <h4 class="font-bold text-gray-900 mb-2">1. 从问题开始</h4>
+                  <p class="text-sm text-gray-700">
+                    先用 AI 完成实际任务，观察哪里出现问题，然后针对性地创建 Skill 解决这些问题
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div class="bg-gradient-to-r from-green-50 to-green-100 rounded-lg p-6 border border-green-200">
+              <div class="flex items-start gap-4">
+                <div class="text-2xl">📦</div>
+                <div>
+                  <h4 class="font-bold text-gray-900 mb-2">2. 结构要清晰</h4>
+                  <p class="text-sm text-gray-700">
+                    当 SKILL.md 太长时，把不同部分拆成单独的文件。这样 AI 只在需要时加载特定内容
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div class="bg-gradient-to-r from-purple-50 to-purple-100 rounded-lg p-6 border border-purple-200">
+              <div class="flex items-start gap-4">
+                <div class="text-2xl">🤖</div>
+                <div>
+                  <h4 class="font-bold text-gray-900 mb-2">3. 从 AI 的角度思考</h4>
+                  <p class="text-sm text-gray-700">
+                    Skill 的名字和描述很重要，这直接影响 AI 何时使用它。名字要清晰，描述要准确
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="space-y-6">
+            <div class="bg-gradient-to-r from-orange-50 to-orange-100 rounded-lg p-6 border border-orange-200">
+              <div class="flex items-start gap-4">
+                <div class="text-2xl">🔄</div>
+                <div>
+                  <h4 class="font-bold text-gray-900 mb-2">4. 持续迭代</h4>
+                  <p class="text-sm text-gray-700">
+                    和 AI 一起工作时，观察它的行为。如果 Skill 哪里用得不好，要求 AI 分析原因并改进
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div class="bg-gradient-to-r from-red-50 to-red-100 rounded-lg p-6 border border-red-200">
+              <div class="flex items-start gap-4">
+                <div class="text-2xl">🔐</div>
+                <div>
+                  <h4 class="font-bold text-gray-900 mb-2">5. 安全第一</h4>
+                  <p class="text-sm text-gray-700">
+                    只使用来自可信来源的 Skills。安装陌生的 Skill 前要仔细检查其内容，特别是代码部分
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div class="bg-gradient-to-r from-indigo-50 to-indigo-100 rounded-lg p-6 border border-indigo-200">
+              <div class="flex items-start gap-4">
+                <div class="text-2xl">⚖️</div>
+                <div>
+                  <h4 class="font-bold text-gray-900 mb-2">6. 代码 vs 文字</h4>
+                  <p class="text-sm text-gray-700">
+                    确定性任务用代码执行更可靠，建议和参考信息放在文字中让 AI 理解
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Security & Future Section -->
+    <section class="py-16 px-6 bg-gradient-to-br from-gray-900 to-gray-800">
+      <div class="max-w-6xl mx-auto">
+        <div class="grid md:grid-cols-2 gap-12">
+          <div>
+            <h2 class="text-3xl font-bold text-white mb-6">安全性考虑</h2>
+            <div class="space-y-4">
+              <div class="bg-red-900 bg-opacity-30 rounded-lg p-4 border border-red-700">
+                <p class="text-red-200 text-sm">
+                  ⚠️ <span class="font-semibold">只从可信来源安装 Skills</span>
+                </p>
+              </div>
+              <p class="text-gray-300">
+                Skills 给了 AI 执行代码的能力。恶意 Skill 可能：
+              </p>
+              <ul class="space-y-2 text-sm text-gray-400 ml-4">
+                <li>• 访问你的计算机文件</li>
+                <li>• 连接到不安全的网络源</li>
+                <li>• 泄露敏感数据</li>
+              </ul>
+              <p class="text-gray-300 text-sm mt-4">
+                💡 检查 Skill 的代码、依赖关系和网络连接，确保安全后再使用
+              </p>
+            </div>
+          </div>
+
+          <div>
+            <h2 class="text-3xl font-bold text-white mb-6">未来发展方向</h2>
+            <div class="space-y-4">
+              <div class="flex gap-3 text-gray-300">
+                <span class="text-blue-400 font-bold">→</span>
+                <span>更简单的 Skill 创建工作流</span>
+              </div>
+              <div class="flex gap-3 text-gray-300">
+                <span class="text-blue-400 font-bold">→</span>
+                <span>企业级 Skill 部署和管理</span>
+              </div>
+              <div class="flex gap-3 text-gray-300">
+                <span class="text-blue-400 font-bold">→</span>
+                <span>AI 自己创建和编辑 Skills</span>
+              </div>
+              <div class="flex gap-3 text-gray-300">
+                <span class="text-blue-400 font-bold">→</span>
+                <span>与 MCP（Model Context Protocol）集成</span>
+              </div>
+              <p class="text-gray-400 text-sm mt-6">
+                Skills 的核心就是简洁性。这让所有人都能创建专业化的 AI 助手，释放 AI 的真正潜力。
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Conclusion Section -->
+    <section class="py-16 px-6 bg-white">
+      <div class="max-w-4xl mx-auto text-center">
+        <h2 class="text-4xl font-bold text-gray-900 mb-6">为什么这很重要？</h2>
+        <div class="space-y-6 text-lg text-gray-700">
+          <p>
+            通用 AI 模型很强大，但它们需要<span class="font-bold">定制化</span>才能真正派上用场。
+          </p>
+          <p>
+            以前，这意味着要为不同的任务构建不同的 AI 系统。现在，通过 Agent Skills，任何人都可以：
+          </p>
+          <div class="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-lg p-8 border border-blue-200">
+            <div class="grid md:grid-cols-3 gap-6 text-center">
+              <div>
+                <div class="text-4xl mb-2">📚</div>
+                <p class="font-bold text-gray-900 mb-2">打包专业知识</p>
+                <p class="text-sm text-gray-600">把自己的工作经验编成文件</p>
+              </div>
+              <div>
+                <div class="text-4xl mb-2">🔄</div>
+                <p class="font-bold text-gray-900 mb-2">重复利用</p>
+                <p class="text-sm text-gray-600">一次创建，处处使用，分享给团队</p>
+              </div>
+              <div>
+                <div class="text-4xl mb-2">🚀</div>
+                <p class="font-bold text-gray-900 mb-2">提高效率</p>
+                <p class="text-sm text-gray-600">AI 助手变成领域专家，工作质量和速度都提升</p>
+              </div>
+            </div>
+          </div>
+          <p class="text-xl font-bold text-blue-600 mt-8">
+            Agent Skills 是将 AI 从通用工具转变为专业伙伴的关键。
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-16 px-6 bg-gradient-to-r from-blue-600 to-indigo-600">
+      <div class="max-w-4xl mx-auto text-center">
+        <h2 class="text-4xl font-bold text-white mb-6">现在就开始</h2>
+        <p class="text-xl text-blue-100 mb-8">
+          准备好创建你自己的 Agent Skill 了吗？
+        </p>
+        <div class="flex flex-wrap gap-4 justify-center">
+          <a
+            href="https://docs.claude.com/en/docs/agents-and-tools/agent-skills/overview"
+            target="_blank"
+            class="inline-flex items-center gap-2 px-6 py-3 bg-white text-blue-600 rounded-lg font-bold hover:bg-gray-100 transition-colors shadow-md"
+          >
+            <span>📖</span>
+            <span>查看官方文档</span>
+          </a>
+          <a
+            href="https://github.com/anthropics/claude-cookbooks/tree/main/skills"
+            target="_blank"
+            class="inline-flex items-center gap-2 px-6 py-3 bg-blue-700 hover:bg-blue-800 text-white rounded-lg font-bold transition-colors shadow-md"
+          >
+            <span>👨‍💻</span>
+            <span>Skills 示例代码</span>
+          </a>
+          <a
+            href="https://github.com/anthropics/skills"
+            target="_blank"
+            class="inline-flex items-center gap-2 px-6 py-3 bg-indigo-700 hover:bg-indigo-800 text-white rounded-lg font-bold transition-colors shadow-md"
+          >
+            <span>🎁</span>
+            <span>官方 Skills 库</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-8 px-6">
+      <div class="max-w-6xl mx-auto">
+        <div class="grid md:grid-cols-3 gap-8 mb-8">
+          <div>
+            <h4 class="font-bold mb-3">Agent Skills 简介</h4>
+            <p class="text-gray-400 text-sm">
+              通过打包指导说明、脚本和资源，让通用 AI 助手变成专业领域的专家。简单而强大的概念，改变 AI 工作的方式。
+            </p>
+          </div>
+          <div>
+            <h4 class="font-bold mb-3">来源</h4>
+            <p class="text-gray-400 text-sm">
+              <a href="https://www.claude.com/blog/skills" target="_blank" class="hover:text-white">Claude 博客 - 介绍 Agent Skills</a>
+              <br />
+              <a href="https://www.anthropic.com/engineering/equipping-agents-for-the-real-world-with-agent-skills" target="_blank" class="hover:text-white">Anthropic 工程博客 - 深度技术讲解</a>
+            </p>
+          </div>
+          <div>
+            <h4 class="font-bold mb-3">更多资源</h4>
+            <p class="text-gray-400 text-sm">
+              <a href="https://docs.claude.com/" target="_blank" class="hover:text-white">Claude 官方文档</a>
+              <br />
+              <a href="https://www.anthropic.com/" target="_blank" class="hover:text-white">Anthropic 官网</a>
+            </p>
+          </div>
+        </div>
+        <div class="border-t border-gray-800 pt-8">
+          <p class="text-gray-400 text-sm text-center">
+            Simple Paper © 2025 · 用简洁的语言和视觉化的方式，让复杂的技术变得容易理解
+          </p>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
+
