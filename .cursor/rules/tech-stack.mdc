@@ -1,8 +1,0 @@
----
-alwaysApply: true
----
-
-- 页面开发：HTML + Tailwind CSS (Minimalist UI) + jQuery
-- 数据可视化（chart）：chart.js
-- 示意图（diagram）：mermaid.js
-- 界面语言：简体中文
